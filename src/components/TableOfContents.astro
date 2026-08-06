@@ -1,0 +1,75 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Only display H2 and H3 headings
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+if (filteredHeadings.length === 0) {
+  return null;
+}
+---
+
+<div class="toc-wrapper">
+  <h3 class="toc-title">Daftar Isi</h3>
+  <nav aria-label="Table of Contents">
+    <ul class="toc-list">
+      {filteredHeadings.map((heading) => (
+        <li 
+          class={`toc-item depth-${heading.depth}`}
+          data-slug={heading.slug}
+          style={{ paddingLeft: heading.depth === 3 ? '28px' : '16px' }}
+        >
+          <a href={`#${heading.slug}`}>{heading.text}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  // ScrollSpy logic to highlight the active header in the ToC
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60% 0px',
+    threshold: 1.0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        
+        // Remove active class from all items
+        document.querySelectorAll('.toc-item').forEach((item) => {
+          item.classList.remove('active');
+        });
+
+        // Add active class to the corresponding menu item
+        const activeItem = document.querySelector(`.toc-item[data-slug="${id}"]`);
+        if (activeItem) {
+          activeItem.classList.add('active');
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Track all headings that are present in the ToC
+  document.querySelectorAll('.toc-item').forEach((item) => {
+    const slug = item.getAttribute('data-slug');
+    if (slug) {
+      const el = document.getElementById(slug);
+      if (el) observer.observe(el);
+    }
+  });
+</script>

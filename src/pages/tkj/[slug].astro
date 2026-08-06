@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('tkj');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, category, tags, duration } = post.data;
+const { Content, headings } = await render(post);
+
+// Calculate word count
+const wordCount = (post.body || '').split(/\s+/).length;
+const showToC = wordCount > 200 && headings.filter(h => h.depth === 2 || h.depth === 3).length > 0;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout title={`${title} — kanghadad.com`} description={description} currentActive="tkj">
+  <div class="container">
+    <!-- Determine layout based on ToC visibility -->
+    <div class={showToC ? "main-layout" : "article-container"}>
+      <!-- Main Content Area -->
+      <div class="content-area">
+        <article class="article-header">
+          <div class="article-meta">
+            <span class="card-tag tag-tkj">{category}</span>
+            <span>📅 {formatDate(pubDate)}</span>
+            <span>⏱️ {duration} min baca</span>
+          </div>
+          <h1 class="article-title">{title}</h1>
+          <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 500;">
+            {description}
+          </p>
+          <hr style="border: 0; border-top: 1px solid var(--border);" />
+        </article>
+
+        <div class="article-body">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Sticky ToC Sidebar -->
+      {showToC && (
+        <aside class="sidebar-area" style="position: relative;">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Add Copy to Clipboard buttons to Shiki code blocks
+  document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('pre');
+    
+    codeBlocks.forEach((block) => {
+      // Create wrapper and header elements
+      const container = document.createElement('div');
+      container.className = 'code-container';
+      container.style.position = 'relative';
+      container.style.margin = '20px 0';
+      
+      const header = document.createElement('div');
+      header.className = 'code-header';
+      
+      const langText = document.createElement('span');
+      // Attempt to find language class (e.g. language-bash)
+      const classes = Array.from(block.classList);
+      const langClass = classes.find(c => c.startsWith('language-'));
+      langText.textContent = langClass ? langClass.replace('language-', '').toUpperCase() : 'CODE';
+      
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.textContent = 'Salin';
+      
+      header.appendChild(langText);
+      header.appendChild(copyBtn);
+      
+      // Rearrange DOM: insert container before codeblock, then move header and codeblock inside container
+      block.parentNode?.insertBefore(container, block);
+      container.appendChild(header);
+      container.appendChild(block);
+      
+      // Reset block margins since container handles it
+      block.style.margin = '0';
+      block.style.borderRadius = '0 0 8px 8px';
+      
+      // Copy functionality
+      copyBtn.addEventListener('click', async () => {
+        const rawCode = block.innerText;
+        try {
+          await navigator.clipboard.writeText(rawCode);
+          copyBtn.textContent = 'Tersalin!';
+          copyBtn.style.borderColor = '#10b981';
+          copyBtn.style.color = '#10b981';
+          
+          setTimeout(() => {
+            copyBtn.textContent = 'Salin';
+            copyBtn.style.borderColor = '';
+            copyBtn.style.color = '';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+          copyBtn.textContent = 'Gagal';
+        }
+      });
+    });
+  });
+</script>

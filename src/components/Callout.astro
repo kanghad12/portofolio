@@ -1,0 +1,51 @@
+---
+interface Props {
+  type?: 'quran' | 'hadith' | 'quote' | 'info';
+  source?: string;
+}
+
+const { type = 'quote', source } = Astro.props;
+
+// Determine emoji or specific subtitle based on type
+const labelMap = {
+  quran: 'Al-Qur\'an',
+  hadith: 'Al-Hadits',
+  quote: 'Kutipan',
+  info: 'Catatan Penting'
+};
+
+const label = labelMap[type];
+---
+
+<div class={`callout callout-${type}`}>
+  <p>
+    <slot />
+  </p>
+  {source && (
+    <span class="callout-source">
+      — {label} {source}
+    </span>
+  )}
+</div>
+
+<style>
+  .callout-quran {
+    --callout-border: #ff7d1a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .callout-hadith {
+    --callout-border: #a1a1aa;
+  }
+  .callout-info {
+    --callout-border: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+    color: var(--text-main);
+    font-style: normal;
+  }
+  .callout-info::before {
+    content: "ℹ";
+    font-size: 1.5rem;
+    top: 10px;
+    opacity: 0.3;
+  }
+</style>

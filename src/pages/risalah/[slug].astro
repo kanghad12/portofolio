@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import Callout from '../../components/Callout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('risalah');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags, duration } = post.data;
+const { Content, headings } = await render(post);
+
+// Calculate word count
+const wordCount = (post.body || '').split(/\s+/).length;
+const showToC = wordCount > 200 && headings.filter(h => h.depth === 2 || h.depth === 3).length > 0;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout title={`${title} — kanghadad.com`} description={description} currentActive="risalah">
+  <div class="container">
+    <div class={showToC ? "main-layout" : "article-container"}>
+      <!-- Main Content Area -->
+      <div class="content-area">
+        <article class="article-header">
+          <div class="article-meta">
+            <span class="card-tag tag-islam">Risalah & Opini</span>
+            <span>📅 {formatDate(pubDate)}</span>
+            <span>⏱️ {duration} min baca</span>
+          </div>
+          <h1 class="article-title">{title}</h1>
+          <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 500;">
+            {description}
+          </p>
+          <hr style="border: 0; border-top: 1px solid var(--border);" />
+        </article>
+
+        <div class="article-body">
+          {/* Inject Callout component into Content so users can write <Callout> in MDX */}
+          <Content components={{ Callout }} />
+        </div>
+      </div>
+
+      <!-- Sticky ToC Sidebar -->
+      {showToC && (
+        <aside class="sidebar-area" style="position: relative;">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+    </div>
+  </div>
+</Layout>

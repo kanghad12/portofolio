@@ -1,0 +1,38 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const tkj = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/tkj" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    category: z.string(),
+    tags: z.array(z.string()).default([]),
+    duration: z.number().default(5), // reading duration in minutes
+  }),
+});
+
+const risalah = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/risalah" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    duration: z.number().default(5),
+  }),
+});
+
+const garden = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/garden" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    status: z.enum(['seedling', 'growing', 'evergreen']),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { tkj, risalah, garden };

@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get and sort all content
+const tkjPosts = await getCollection('tkj');
+const risalahPosts = await getCollection('risalah');
+const gardenPosts = await getCollection('garden');
+
+// Map entries with collection name attached
+const allPosts = [
+  ...tkjPosts.map(p => ({ ...p, collection: 'tkj' as const })),
+  ...risalahPosts.map(p => ({ ...p, collection: 'risalah' as const })),
+  ...gardenPosts.map(p => ({ ...p, collection: 'garden' as const }))
+];
+
+// Sort posts by pubDate descending
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+
+// Take the latest 3 posts
+const latestPosts = sortedPosts.slice(0, 3);
+---
+
+<Layout title="Kang Hadad — Catatan Vokasi & Pemikiran Islam" currentActive="home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <span class="hero-badge">Pusat Catatan Terbuka</span>
+          <h1 class="hero-title">Logika <span>Teknologi</span>, Vokasi & Value <span>Islam</span></h1>
+          <p class="hero-description">
+            Repositori materi dan pemikiran Kang Hadad — Guru Keterampilan TKJ di MAN 2 Cianjur. Berisi modul jaringan komputer, web development, IoT, serta risalah dakwah digital & kritik sosial.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-label">Institusi / Lokasi</span>
+            <span class="meta-value">MAN 2 Cianjur (Plus Keterampilan)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Stack Hosting</span>
+            <span class="meta-value">Astro.build + Cloudflare Pages</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Fokus Bahasan</span>
+            <span class="meta-value">Networking, Web, Cyber Ethics, Islam</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <div class="container">
+    <div class="main-layout">
+      <!-- Latest Posts Section -->
+      <div class="content-area">
+        <h2 class="section-title">Catatan Terbaru</h2>
+        
+        {latestPosts.length === 0 ? (
+          <p style="color: var(--text-muted);">Belum ada catatan yang ditulis.</p>
+        ) : (
+          latestPosts.map(post => (
+            <PostCard entry={post} collection={post.collection} />
+          ))
+        )}
+
+        <!-- Search link promotion -->
+        <div style="margin-top: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">🔍 Cari Materi Lebih Spesifik?</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Gunakan fitur pencarian untuk menemukan perintah MikroTik atau esai dakwah tertentu.</p>
+          </div>
+          <a href="/search" class="theme-toggle" style="text-decoration: none; padding: 10px 20px; border-color: var(--accent-orange); color: var(--accent-orange);">
+            Buka Halaman Pencarian
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar Section -->
+      <aside class="sidebar-area">
+        <div class="widget">
+          <h3 class="widget-title">Tentang Penulis</h3>
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.6;">
+            Guru Keterampilan TKJ (Teknik Komputer & Jaringan) & penggiat dakwah digital di Cianjur. Suka mengulik sistem jaringan komputer, web development, dan kajian sosial-keislaman.
+          </p>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-title">Kategori Utama</h3>
+          <ul class="widget-list">
+            <li><a href="/tkj">🌐 Modul TKJ & Jaringan</a></li>
+            <li><a href="/risalah">📖 Risalah & Opini Islam</a></li>
+            <li><a href="/garden">🌱 Digital Garden / Catatan</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>

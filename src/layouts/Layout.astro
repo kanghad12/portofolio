@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentActive?: 'home' | 'tkj' | 'risalah' | 'garden' | 'about';
+}
+
+const { title, description = 'Portofolio & CMS Catatan Vokasi (TKJ) dan Risalah Pemikiran Islam Kang Hadad.', currentActive = 'home' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Inline Script to set theme instantly, preventing theme flashing -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          return 'light';
+        }
+        return 'dark';
+      })();
+      
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      // Save it back to apply default if not set
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('theme', theme);
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <header>
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="/" class="logo-area">
+            <span class="logo-title">kanghadad<span>.com</span></span>
+            <span class="logo-subtitle">Pendidik TKJ & Catatan Pemikiran</span>
+          </a>
+          <div class="nav-right">
+            <nav class="nav-links">
+              <a href="/" class={currentActive === 'home' ? 'active' : ''}>Beranda</a>
+              <a href="/tkj" class={currentActive === 'tkj' ? 'active' : ''}>Modul TKJ</a>
+              <a href="/risalah" class={currentActive === 'risalah' ? 'active' : ''}>Risalah</a>
+              <a href="/garden" class={currentActive === 'garden' ? 'active' : ''}>Garden</a>
+            </nav>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+              <span id="themeEmoji">🌙</span> <span id="themeLabel">Dark</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Slot -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">kanghadad<span>.com</span></div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Pusat materi vokasi TKJ dan risalah pemikiran Islam.</p>
+          </div>
+          <div style="text-align: right; font-size: 0.85rem; color: var(--text-muted);">
+            MAN 2 Cianjur (MAN Plus Keterampilan)<br>
+            Cianjur, Jawa Barat
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; {new Date().getFullYear()} Kang Hadad. Hosted on Cloudflare Pages.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Theme Toggle logic script -->
+    <script>
+      const themeBtn = document.getElementById('themeBtn');
+      const themeEmoji = document.getElementById('themeEmoji');
+      const themeLabel = document.getElementById('themeLabel');
+
+      function updateToggleButton(currentTheme: string) {
+        if (!themeEmoji || !themeLabel) return;
+        if (currentTheme === 'light') {
+          themeEmoji.textContent = '☀️';
+          themeLabel.textContent = 'Light';
+        } else {
+          themeEmoji.textContent = '🌙';
+          themeLabel.textContent = 'Dark';
+        }
+      }
+
+      // Initial state load
+      const initialTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateToggleButton(initialTheme);
+
+      // Click handler
+      themeBtn?.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        updateToggleButton(nextTheme);
+      });
+    </script>
+  </body>
+</html>

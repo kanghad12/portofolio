@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('garden');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, status, tags } = post.data;
+const { Content, headings } = await render(post);
+
+// Calculate word count
+const wordCount = (post.body || '').split(/\s+/).length;
+const showToC = wordCount > 200 && headings.filter(h => h.depth === 2 || h.depth === 3).length > 0;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout title={`${title} — kanghadad.com`} description={description} currentActive="garden">
+  <div class="container">
+    <div class={showToC ? "main-layout" : "article-container"}>
+      <!-- Main Content Area -->
+      <div class="content-area">
+        <article class="article-header">
+          <div class="article-meta">
+            <span class="garden-badge">
+              {status === 'seedling' && '🌱 Seedling'}
+              {status === 'growing' && '🌿 Growing'}
+              {status === 'evergreen' && '🌳 Evergreen'}
+            </span>
+            <span>📅 {formatDate(pubDate)}</span>
+          </div>
+          <h1 class="article-title">{title}</h1>
+          <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 500;">
+            {description}
+          </p>
+          <hr style="border: 0; border-top: 1px solid var(--border);" />
+        </article>
+
+        <div class="article-body">
+          <Content />
+        </div>
+        
+        {tags && tags.length > 0 && (
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-wrap: wrap;">
+            {tags.map(t => (
+              <a href={`/search?q=${t}`} class="filter-btn" style="text-decoration: none;">#{t}</a>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Sticky ToC Sidebar -->
+      {showToC && (
+        <aside class="sidebar-area" style="position: relative;">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+    </div>
+  </div>
+</Layout>

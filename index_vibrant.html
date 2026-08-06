@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kang Hadad — Catatan Vokasi & Pemikiran Islam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Themes */
+        :root[data-theme="light"] {
+            --bg-body: #fafafa;
+            --bg-card: #ffffff;
+            --bg-alt: #f1f3f5;
+            --text-main: #121212;
+            --text-muted: #555555;
+            --border: #e2e8f0;
+            --accent-orange: #ff6b00;
+            --accent-orange-hover: #e05d00;
+            --tag-tkj-bg: #fff0e6;
+            --tag-tkj-text: #d95200;
+            --tag-islam-bg: #f0f3f6;
+            --tag-islam-text: #2d3748;
+            --code-bg: #18181b;
+            --code-text: #f4f4f5;
+            --callout-bg: #fff7ed;
+            --callout-border: #ff6b00;
+            --callout-text: #7c2d12;
+            --header-bg: rgba(250, 250, 250, 0.9);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-body: #09090b;
+            --bg-card: #121215;
+            --bg-alt: #1a1a1e;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+            --accent-orange: #ff7d1a;
+            --accent-orange-hover: #ff9442;
+            --tag-tkj-bg: #321908;
+            --tag-tkj-text: #ff9442;
+            --tag-islam-bg: #27272a;
+            --tag-islam-text: #e4e4e7;
+            --code-bg: #000000;
+            --code-text: #ff7d1a;
+            --callout-bg: #1c1008;
+            --callout-border: #ff7d1a;
+            --callout-text: #ffedd5;
+            --header-bg: rgba(9, 9, 11, 0.9);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo-area {
+            text-decoration: none;
+        }
+
+        .logo-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.03em;
+        }
+
+        .logo-title span {
+            color: var(--accent-orange);
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            font-weight: 600;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 18px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-orange);
+        }
+
+        /* Theme Switcher Button */
+        .theme-toggle {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 50px 0 36px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-grid {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .hero-text {
+            flex: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-title span {
+            color: var(--accent-orange);
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero-meta {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .meta-item {
+            margin-bottom: 14px;
+        }
+        .meta-item:last-child { margin-bottom: 0; }
+
+        .meta-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            font-weight: 800;
+            display: block;
+        }
+
+        .meta-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Layout */
+        .main-layout {
+            display: flex;
+            gap: 36px;
+            padding: 40px 0;
+        }
+
+        .content-area { flex: 2; }
+        .sidebar-area { flex: 1; }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+        }
+
+        /* Article Card */
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-orange);
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .tag-tkj { background: var(--tag-tkj-bg); color: var(--tag-tkj-text); }
+        .tag-islam { background: var(--tag-islam-bg); color: var(--tag-islam-text); }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .card-title a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .card-excerpt {
+            font-size: 0.925rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .card-footer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+
+        /* Reader Components Showcase */
+        .preview-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 10px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .preview-box h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--accent-orange);
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            margin: 14px 0;
+            border: 1px solid var(--border);
+        }
+
+        .callout {
+            background: var(--callout-bg);
+            border-left: 3px solid var(--callout-border);
+            color: var(--callout-text);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.925rem;
+            font-weight: 600;
+            margin: 14px 0;
+        }
+
+        /* Sidebar Widgets */
+        .widget {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-orange);
+        }
+
+        .widget-list { list-style: none; }
+        .widget-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .widget-list li:last-child { border: none; }
+        .widget-list a { color: var(--text-main); text-decoration: none; }
+        .widget-list a:hover { color: var(--accent-orange); }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 40px 0 24px 0;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .footer-brand span { color: var(--accent-orange); }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo-area">
+                    <span class="logo-title">kanghadad<span>.com</span></span>
+                    <span class="logo-subtitle">Pendidik TKJ & Catatan Pemikiran</span>
+                </a>
+                <div class="nav-right">
+                    <nav class="nav-links">
+                        <a href="#" class="active">Beranda</a>
+                        <a href="#">Modul TKJ</a>
+                        <a href="#">Risalah</a>
+                        <a href="#">Tentang</a>
+                    </nav>
+                    <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">
+                        🌙 <span id="themeLabel">Dark</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <span class="hero-badge">Pusat Catatan Terbuka</span>
+                    <h1 class="hero-title">Logika <span>Teknologi</span>, Vokasi & Value <span>Islam</span></h1>
+                    <p class="hero-description">
+                        Repositori materi dan pemikiran Kang Hadad — Guru Keterampilan TKJ di MAN 2 Cianjur. Berisi modul jaringan komputer, web development, IoT, serta risalah dakwah digital & kritik sosial.
+                    </p>
+                </div>
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Institusi / Lokasi</span>
+                        <span class="meta-value">MAN 2 Cianjur (Plus Keterampilan)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Stack Hosting</span>
+                        <span class="meta-value">Astro.build + Cloudflare Pages</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Fokus Bahasan</span>
+                        <span class="meta-value">Networking, Web, Cyber Ethics, Islam</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="main-layout">
+            <div class="content-area">
+                <h2 class="section-title">Catatan Terbaru</h2>
+
+                <!-- Card 1 -->
+                <article class="article-card">
+                    <span class="card-tag tag-tkj">Modul TKJ</span>
+                    <h3 class="card-title"><a href="#">Panduan Praktis Konfigurasi Routing OSPF v7 pada RouterBoard MikroTik</a></h3>
+                    <p class="card-excerpt">Membangun arsitektur jaringan skala laboratorium sekolah dengan dynamic routing OSPF untuk pembagian beban trafik secara otomatis.</p>
+                    <div class="card-footer">📅 05 Agustus 2026 • ⏱️ 6 min baca</div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="article-card">
+                    <span class="card-tag tag-islam">Risalah & Opini</span>
+                    <h3 class="card-title"><a href="#">Fikih Muamalah Digital: Menjaga Integritas Data & Etika Penggunaan AI</a></h3>
+                    <p class="card-excerpt">Meninjau perkembangan teknologi kecerdasan buatan dari kacamata syariat Islam: aspek privasi, kejujuran data, dan tanggung jawab praktisi IT.</p>
+                    <div class="card-footer">📅 29 Juli 2026 • ⏱️ 8 min baca</div>
+                </article>
+
+                <!-- Readability Showcase -->
+                <div class="preview-box">
+                    <h3>⚡ Kenyamanan Membaca & Kontras Teks</h3>
+                    <p>Format tampilan dirancang agar pembaca betah berlama-lama membaca materi panjang. Blok perintah dibuat sangat kontras:</p>
+
+                    <div class="code-block">
+# Setting IP Address & DHCP Server via Terminal MikroTik
+/ip address add address=192.168.100.1/24 interface=ether2-LAN
+/ip dhcp-server setup
+                    </div>
+
+                    <div class="callout">
+                        "Teknologi hanyalah akselerator. Karakter, nilai, dan etika adalah penentu ke mana arah efisiensi itu akan membawa kita."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar-area">
+                <div class="widget">
+                    <h3 class="widget-title">Tentang Penulis</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 10px;">
+                        Guru Keterampilan TKJ & Penggiat Dakwah Digital di Cianjur. Menyukai sistem jaringan, web dev, dan kajian sosial-keislaman.
+                    </p>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Kategori Materi</h3>
+                    <ul class="widget-list">
+                        <li><a href="#">🌐 MikroTik & Cisco Networking</a></li>
+                        <li><a href="#">💻 Web Development & Server</a></li>
+                        <li><a href="#">📖 Risalah & Etika Digital Islam</a></li>
+                        <li><a href="#">🏫 Catatan Pembelajaran Vokasi</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">kanghadad<span>.com</span></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Pusat materi vokasi TKJ dan risalah pemikiran Islam.</p>
+                </div>
+                <div style="text-align: right; font-size: 0.85rem; color: var(--text-muted);">
+                    MAN 2 Cianjur (MAN Plus Keterampilan)<br>
+                    Cianjur, Jawa Barat
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Kang Hadad. Hosted on Cloudflare Pages.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toggle Theme Script -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btnLabel = document.getElementById('themeLabel');
+            const btn = document.getElementById('themeBtn');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                btnLabel.textContent = 'Light';
+                btn.firstChild.textContent = '☀️ ';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btnLabel.textContent = 'Dark';
+                btn.firstChild.textContent = '🌙 ';
+            }
+        }
+    </script>
+</body>
+</html>

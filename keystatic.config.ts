@@ -1,18 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-  storage: {
-    kind: 'local',
-  },
-  // Untuk integrasi Cloudflare Pages & GitHub di produksi:
-  // storage: process.env.NODE_ENV === 'production'
-  //   ? {
-  //       kind: 'github',
-  //       repo: 'username/repo-name', // Ganti dengan repo Anda
-  //     }
-  //   : {
-  //       kind: 'local',
-  //     },
+  storage: process.env.NODE_ENV === 'production'
+    ? {
+        kind: 'github',
+        repo: 'kanghad12/portofolio',
+      }
+    : {
+        kind: 'local',
+      },
   collections: {
     tkj: collection({
       label: 'Modul TKJ',

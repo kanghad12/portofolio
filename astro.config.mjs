@@ -12,6 +12,7 @@ const isBuild = process.argv.includes('build');
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'hybrid',
   integrations: [react(), mdx(), keystatic()],
   adapter: isBuild ? cloudflare() : undefined
 });

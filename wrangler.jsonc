@@ -2,5 +2,7 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"compatibility_date": "2026-08-05",
 	"name": "certain-corot",
-	"pages_build_output_dir": "./dist"
+	"assets": {
+		"directory": "./dist"
+	}
 }

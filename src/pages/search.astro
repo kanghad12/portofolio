@@ -3,17 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import SearchComponent from '../components/Search';
 import { getCollection } from 'astro:content';
 
-const tkjPosts = await getCollection('tkj');
+const informatikaPosts = await getCollection('informatika');
 const risalahPosts = await getCollection('risalah');
-const gardenPosts = await getCollection('garden');
+const tutorialPosts = await getCollection('tutorial');
 
 // Prepare items for client-side search component
 const searchItems = [
-  ...tkjPosts.map((p) => ({
+  ...informatikaPosts.map((p) => ({
     slug: p.id,
     title: p.data.title,
     description: p.data.description,
-    collection: 'tkj' as const,
+    collection: 'informatika' as const,
     pubDate: p.data.pubDate.toISOString(),
     tags: p.data.tags,
     category: p.data.category,
@@ -28,14 +28,14 @@ const searchItems = [
     tags: p.data.tags,
     duration: p.data.duration,
   })),
-  ...gardenPosts.map((p) => ({
+  ...tutorialPosts.map((p) => ({
     slug: p.id,
     title: p.data.title,
     description: p.data.description,
-    collection: 'garden' as const,
+    collection: 'tutorial' as const,
     pubDate: p.data.pubDate.toISOString(),
     tags: p.data.tags,
-    status: p.data.status,
+    duration: p.data.duration,
   })),
 ];
 ---
@@ -44,7 +44,7 @@ const searchItems = [
   <div class="container">
     <div style="padding: 40px 0;">
       <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Pencarian Terpadu</h1>
-      <p style="color: var(--text-muted); margin-bottom: 40px;">Cari materi TKJ, esai risalah, atau status digital garden berdasarkan kata kunci atau tag.</p>
+      <p style="color: var(--text-muted); margin-bottom: 40px;">Cari materi Informatika, risalah dakwah, kumpulan tutorial, atau tag tertentu.</p>
       
       <!-- Client-side React Search Component with client:load directive -->
       <SearchComponent items={searchItems} client:load />

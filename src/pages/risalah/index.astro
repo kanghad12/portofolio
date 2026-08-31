@@ -5,15 +5,18 @@ import { getCollection } from 'astro:content';
 
 const posts = await getCollection('risalah');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Get unique tags for sidebar display
+const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
 ---
 
-<Layout title="Risalah & Opini Islam — kanghadad.com" currentActive="risalah">
+<Layout title="Risalah Dakwah & Pemikiran Islam — kanghadad.com" description="Kumpulan esai keislaman, dakwah digital, etika siber, fikih muamalah kontemporer, dan pemikiran kritik sosial oleh Kang Hadad." currentActive="risalah">
   <div class="container">
     <div class="main-layout">
       <!-- Main Content -->
-      <div class="content-area">
-        <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">📖 Risalah & Opini</h1>
-        <p style="color: var(--text-muted); margin-bottom: 32px;">Catatan dakwah digital, fikih muamalah kontemporer, etika penggunaan teknologi, serta esai kritik sosial dari kacamata Islam.</p>
+      <main class="content-area">
+        <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">📖 Risalah Dakwah</h1>
+        <p style="color: var(--text-muted); margin-bottom: 32px;">Catatan dakwah digital, esai keislaman, fikih muamalah kontemporer, etika teknologi, serta kritik sosial.</p>
 
         {sortedPosts.length === 0 ? (
           <p style="color: var(--text-muted);">Belum ada risalah yang diterbitkan.</p>
@@ -22,16 +25,44 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
             <PostCard entry={post} collection="risalah" />
           ))
         )}
-      </div>
+      </main>
 
       <!-- Sidebar -->
       <aside class="sidebar-area">
+        <!-- Callout Widget -->
+        <div class="widget" style="padding: 18px 20px;">
+          <h3 class="widget-title">Mutiara Hikmah</h3>
+          <div class="callout" style="margin: 8px 0 0 0; background: var(--bg-alt); padding: 14px 18px; border-left-color: var(--accent-orange);">
+            <p style="font-size: 0.9rem; line-height: 1.6; font-style: italic; color: var(--text-main);">
+              "Penamu adalah lisanmu yang kedua, maka tulislah hanya apa yang mendatangkan kemanfaatan dan pahala bagi manusia."
+            </p>
+            <span class="callout-source" style="font-size: 0.75rem; font-weight: 700; color: var(--accent-orange); margin-top: 8px; display: block;">
+              Etika Dakwah Digital
+            </span>
+          </div>
+        </div>
+
+        <!-- Fokus Risalah -->
         <div class="widget">
           <h3 class="widget-title">Fokus Risalah</h3>
           <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
-            Mengintegrasikan logika teknologi modern dengan khazanah keilmuan Islam klasik demi terwujudnya kesadaran digital yang berkah dan beretika.
+            Mengintegrasikan logika teknologi modern dengan khazanah keilmuan Islam klasik demi terwujudnya kesadaran digital yang berkah, amanah, dan beretika.
           </p>
         </div>
+
+        <!-- Tags Widget -->
+        {allTags.length > 0 && (
+          <div class="widget">
+            <h3 class="widget-title">Topik Bahasan</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+              {allTags.map(tag => (
+                <a href={`/search?q=${tag}`} style="text-decoration: none; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: var(--bg-alt); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; transition: all 0.2s;">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </aside>
     </div>
   </div>

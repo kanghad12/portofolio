@@ -4,7 +4,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('garden');
+  const posts = await getCollection('tutorial');
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, status, tags } = post.data;
+const { title, description, pubDate, tags, duration } = post.data;
 const { Content, headings } = await render(post);
 
 // Calculate word count
@@ -28,19 +28,16 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout title={`${title} — kanghadad.com`} description={description} currentActive="garden">
+<Layout title={`${title} — kanghadad.com`} description={description} currentActive="tutorial">
   <div class="container">
     <div class={showToC ? "main-layout" : "article-container"}>
       <!-- Main Content Area -->
       <div class="content-area">
         <article class="article-header">
           <div class="article-meta">
-            <span class="garden-badge">
-              {status === 'seedling' && '🌱 Seedling'}
-              {status === 'growing' && '🌿 Growing'}
-              {status === 'evergreen' && '🌳 Evergreen'}
-            </span>
+            <span class="card-tag tag-garden">Tutorial</span>
             <span>📅 {formatDate(pubDate)}</span>
+            {duration && <span>⏱️ {duration} min baca</span>}
           </div>
           <h1 class="article-title">{title}</h1>
           <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 500;">

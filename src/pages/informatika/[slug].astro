@@ -4,7 +4,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('tkj');
+  const posts = await getCollection('informatika');
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -28,7 +28,7 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout title={`${title} — kanghadad.com`} description={description} currentActive="tkj">
+<Layout title={`${title} — kanghadad.com`} description={description} currentActive="informatika">
   <div class="container">
     <!-- Determine layout based on ToC visibility -->
     <div class={showToC ? "main-layout" : "article-container"}>

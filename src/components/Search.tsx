@@ -4,11 +4,10 @@ export interface SearchItem {
   slug: string;
   title: string;
   description: string;
-  collection: 'tkj' | 'risalah' | 'garden';
+  collection: 'informatika' | 'risalah' | 'tutorial';
   pubDate: string;
   tags: string[];
   category?: string;
-  status?: string;
   duration?: number;
 }
 
@@ -60,15 +59,15 @@ export default function Search({ items }: Props) {
   };
 
   const getCollectionBadgeClass = (col: string) => {
-    if (col === 'tkj') return 'card-tag tag-tkj';
+    if (col === 'informatika') return 'card-tag tag-tkj';
     if (col === 'risalah') return 'card-tag tag-islam';
     return 'card-tag tag-garden';
   };
 
   const getCollectionName = (col: string) => {
-    if (col === 'tkj') return 'Modul TKJ';
-    if (col === 'risalah') return 'Risalah & Opini';
-    return 'Digital Garden';
+    if (col === 'informatika') return 'Informatika';
+    if (col === 'risalah') return 'Risalah Dakwah';
+    return 'Tutorial';
   };
 
   return (
@@ -93,22 +92,22 @@ export default function Search({ items }: Props) {
           Semua Catatan
         </button>
         <button
-          className={`filter-btn ${selectedCollection === 'tkj' ? 'active' : ''}`}
-          onClick={() => { setSelectedCollection('tkj'); setSelectedTag('all'); }}
+          className={`filter-btn ${selectedCollection === 'informatika' ? 'active' : ''}`}
+          onClick={() => { setSelectedCollection('informatika'); setSelectedTag('all'); }}
         >
-          🌐 Modul TKJ
+          🌐 Informatika
         </button>
         <button
           className={`filter-btn ${selectedCollection === 'risalah' ? 'active' : ''}`}
           onClick={() => { setSelectedCollection('risalah'); setSelectedTag('all'); }}
         >
-          📖 Risalah Islam
+          📖 Risalah Dakwah
         </button>
         <button
-          className={`filter-btn ${selectedCollection === 'garden' ? 'active' : ''}`}
-          onClick={() => { setSelectedCollection('garden'); setSelectedTag('all'); }}
+          className={`filter-btn ${selectedCollection === 'tutorial' ? 'active' : ''}`}
+          onClick={() => { setSelectedCollection('tutorial'); setSelectedTag('all'); }}
         >
-          🌱 Digital Garden
+          📚 Tutorial
         </button>
       </div>
 
@@ -156,13 +155,6 @@ export default function Search({ items }: Props) {
                 {getCollectionName(item.collection)} {item.category ? `• ${item.category}` : ''}
               </span>
               
-              {item.status && (
-                <span className="garden-badge" style={{ marginLeft: '12px', fontSize: '0.65rem', padding: '2px 8px' }}>
-                  {item.status === 'seedling' && '🌱 Seed'}
-                  {item.status === 'growing' && '🌿 Growing'}
-                  {item.status === 'evergreen' && '🌳 Evergreen'}
-                </span>
-              )}
 
               <h3 className="card-title">
                 <a href={`/${item.collection}/${item.slug}`}>{item.title}</a>

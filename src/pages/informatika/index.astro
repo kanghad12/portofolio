@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('informatika');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Get unique categories for filtering
+const categories = [...new Set(posts.map(post => post.data.category).filter(Boolean))];
+---
+
+<Layout title="Materi Informatika & Jaringan — kanghadad.com" description="Kumpulan modul praktis konfigurasi jaringan komputer, MikroTik, Cisco, Linux Server, dan materi dasar Informatika untuk siswa vokasi." currentActive="informatika">
+  <div class="container">
+    <div class="main-layout">
+      <!-- Main Content -->
+      <main class="content-area">
+        <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">🌐 Materi Informatika</h1>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Panduan praktis konfigurasi jaringan komputer, Linux Server, dasar-dasar pemrograman, dan materi vokasi pendukung kompetensi siswa.</p>
+
+        {sortedPosts.length > 0 && (
+          <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Semua Materi</button>
+            {categories.map(cat => (
+              <button class="filter-btn" data-filter={cat.toLowerCase()}>{cat}</button>
+            ))}
+          </div>
+        )}
+
+        {sortedPosts.length === 0 ? (
+          <p style="color: var(--text-muted);">Belum ada materi Informatika yang diterbitkan.</p>
+        ) : (
+          <div id="posts-list">
+            {sortedPosts.map(post => (
+              <div class="post-card-wrapper" data-category={post.data.category ? post.data.category.toLowerCase() : ''}>
+                <PostCard entry={post} collection="informatika" />
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar-area">
+        <div class="widget">
+          <h3 class="widget-title">Kurikulum Vokasi</h3>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Materi di halaman ini disusun berdasarkan standar kompetensi industri, kurikulum Informatika vokasi, dan SKKNI Bidang Jaringan Komputer.
+          </p>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+            Sangat cocok untuk referensi belajar mandiri siswa, persiapan ujian kompetensi kejuruan (UKK), atau sertifikasi teknisi jaringan dasar.
+          </p>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-title">Pintasan Cepat</h3>
+          <ul class="widget-list">
+            <li><a href="/search">🔍 Cari Perintah Spesifik</a></li>
+            <li><a href="/tutorial">📚 Panduan Pemrograman & Web</a></li>
+            <li><a href="/risalah">📖 Esai Dakwah & Etika Digital</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Client-side filtering logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const postWrappers = document.querySelectorAll('.post-card-wrapper');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Toggle active class on buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        postWrappers.forEach(wrapper => {
+          const category = wrapper.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            (wrapper as HTMLElement).style.display = 'block';
+          } else {
+            (wrapper as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

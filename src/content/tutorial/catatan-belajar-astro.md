@@ -2,7 +2,7 @@
 title: Mengapa Saya Bermigrasi dari WordPress ke Astro untuk Web Pribadi
 description: Catatan digital garden tentang efisiensi, performa, dan kemudahan pemeliharaan menggunakan Astro static site generator dibandingkan dengan CMS database konvensional.
 pubDate: 2026-08-01
-status: evergreen
+duration: 5
 tags: [astro, webdev, static-site, minimal]
 ---
 

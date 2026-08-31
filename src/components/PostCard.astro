@@ -12,7 +12,7 @@ interface Props {
       duration?: number;
     };
   };
-  collection: 'tkj' | 'risalah' | 'garden';
+  collection: 'informatika' | 'risalah' | 'tutorial';
 }
 
 const { entry, collection } = Astro.props;
@@ -27,15 +27,15 @@ const formatDate = (date: Date) => {
 };
 
 const getCollectionBadgeClass = () => {
-  if (collection === 'tkj') return 'card-tag tag-tkj';
+  if (collection === 'informatika') return 'card-tag tag-tkj';
   if (collection === 'risalah') return 'card-tag tag-islam';
   return 'card-tag tag-garden';
 };
 
 const getCollectionName = () => {
-  if (collection === 'tkj') return 'Modul TKJ';
-  if (collection === 'risalah') return 'Risalah & Opini';
-  return 'Digital Garden';
+  if (collection === 'informatika') return 'Informatika';
+  if (collection === 'risalah') return 'Risalah Dakwah';
+  return 'Tutorial';
 };
 ---
 
@@ -44,13 +44,6 @@ const getCollectionName = () => {
     {getCollectionName()} {category ? `• ${category}` : ''}
   </span>
   
-  {status && (
-    <span class="garden-badge" style="margin-left: 12px; font-size: 0.65rem; padding: 2px 8px;">
-      {status === 'seedling' && '🌱 Seed'}
-      {status === 'growing' && '🌿 Growing'}
-      {status === 'evergreen' && '🌳 Evergreen'}
-    </span>
-  )}
 
   <h3 class="card-title">
     <a href={`/${collection}/${entry.id}`}>{title}</a>

@@ -4,10 +4,10 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  currentActive?: 'home' | 'tkj' | 'risalah' | 'garden' | 'about';
+  currentActive?: 'home' | 'informatika' | 'risalah' | 'tutorial' | 'about';
 }
 
-const { title, description = 'Portofolio & CMS Catatan Vokasi (TKJ) dan Risalah Pemikiran Islam Kang Hadad.', currentActive = 'home' } = Astro.props;
+const { title, description = 'Portofolio, Materi Informatika, Risalah Dakwah, dan Kumpulan Tutorial Kang Hadad.', currentActive = 'home' } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -69,14 +69,14 @@ const { title, description = 'Portofolio & CMS Catatan Vokasi (TKJ) dan Risalah 
         <div class="nav-wrapper">
           <a href="/" class="logo-area">
             <span class="logo-title">kanghadad<span>.com</span></span>
-            <span class="logo-subtitle">Pendidik TKJ & Catatan Pemikiran</span>
+            <span class="logo-subtitle">Pendidik Informatika & Catatan Pemikiran</span>
           </a>
           <div class="nav-right">
             <nav class="nav-links">
               <a href="/" class={currentActive === 'home' ? 'active' : ''}>Beranda</a>
-              <a href="/tkj" class={currentActive === 'tkj' ? 'active' : ''}>Modul TKJ</a>
-              <a href="/risalah" class={currentActive === 'risalah' ? 'active' : ''}>Risalah</a>
-              <a href="/garden" class={currentActive === 'garden' ? 'active' : ''}>Garden</a>
+              <a href="/informatika" class={currentActive === 'informatika' ? 'active' : ''}>Informatika</a>
+              <a href="/risalah" class={currentActive === 'risalah' ? 'active' : ''}>Risalah Dakwah</a>
+              <a href="/tutorial" class={currentActive === 'tutorial' ? 'active' : ''}>Tutorial</a>
             </nav>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
               <span id="themeEmoji">🌙</span> <span id="themeLabel">Dark</span>
@@ -97,7 +97,7 @@ const { title, description = 'Portofolio & CMS Catatan Vokasi (TKJ) dan Risalah 
         <div class="footer-grid">
           <div>
             <div class="footer-brand">kanghadad<span>.com</span></div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Pusat materi vokasi TKJ dan risalah pemikiran Islam.</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Pusat materi Informatika, risalah dakwah, dan kumpulan tutorial.</p>
           </div>
           <div style="text-align: right; font-size: 0.85rem; color: var(--text-muted);">
             MAN 2 Cianjur (MAN Plus Keterampilan)<br>

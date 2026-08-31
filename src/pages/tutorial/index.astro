@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('tutorial');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Get unique tags for sidebar display
+const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+---
+
+<Layout title="Kumpulan Tutorial & Panduan Praktis — kanghadad.com" description="Kumpulan tutorial langkah-demi-langkah, tips pengembangan web modern (Astro, React, Jamstack), sysadmin, dan pemecahan masalah (troubleshooting)." currentActive="tutorial">
+  <div class="container">
+    <div class="main-layout">
+      <!-- Main Content -->
+      <main class="content-area">
+        <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">📚 Kumpulan Tutorial</h1>
+        <p style="color: var(--text-muted); margin-bottom: 32px;">Panduan langkah-demi-langkah, tips pengembangan web, sysadmin, pemrograman, dan integrasi sistem teknologi.</p>
+
+        {sortedPosts.length === 0 ? (
+          <p style="color: var(--text-muted);">Belum ada tutorial yang diterbitkan.</p>
+        ) : (
+          <div class="garden-grid">
+            {sortedPosts.map(post => (
+              <PostCard entry={post} collection="tutorial" />
+            ))}
+          </div>
+        )}
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar-area">
+        <!-- Self-Learning Guide Widget -->
+        <div class="widget">
+          <h3 class="widget-title">Panduan Belajar</h3>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Setiap tutorial dirancang agar ringkas dan dapat dipraktikkan langsung dalam waktu singkat.
+          </p>
+          <ul class="widget-list" style="font-size: 0.8rem; line-height: 1.5; color: var(--text-muted);">
+            <li style="border-bottom: 1px solid var(--border); padding: 6px 0;">🎯 Mulailah dari tutorial bertag <strong>#static-site</strong> atau <strong>#webdev</strong> dasar.</li>
+            <li style="border-bottom: 1px solid var(--border); padding: 6px 0;">💻 Gunakan tombol <strong>Salin</strong> pada blok kode untuk menyalin sintaks dengan aman.</li>
+            <li style="padding: 6px 0 0 0;">🛠️ Coba lakukan modifikasi pada file konfigurasi lokal Anda setelah membaca materi.</li>
+          </ul>
+        </div>
+
+        <!-- Tags Widget -->
+        {allTags.length > 0 && (
+          <div class="widget">
+            <h3 class="widget-title">Topik Tutorial</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+              {allTags.map(tag => (
+                <a href={`/search?q=${tag}`} style="text-decoration: none; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: var(--bg-alt); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; transition: all 0.2s;">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
+  </div>
+</Layout>

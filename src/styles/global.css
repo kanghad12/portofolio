@@ -703,3 +703,172 @@ pre.code-block, pre[class*="language-"] {
         flex-direction: column;
     }
 }
+
+/* ==========================================================================
+   Rich HTML Content & Design System Elements in Articles
+   ========================================================================== */
+
+/* Tables */
+.article-body .table-wrapper,
+.article-body table {
+    width: 100%;
+    margin: 24px 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.925rem;
+}
+
+.article-body table th {
+    background-color: var(--bg-alt);
+    color: var(--text-main);
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    letter-spacing: -0.01em;
+}
+
+.article-body table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
+    vertical-align: top;
+}
+
+.article-body table tr:last-child td {
+    border-bottom: none;
+}
+
+.article-body table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+:root[data-theme="light"] .article-body table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.article-body table tr:hover td {
+    background-color: var(--bg-alt);
+}
+
+/* Blockquotes */
+.article-body blockquote {
+    background: var(--callout-bg);
+    border-left: 4px solid var(--callout-border);
+    color: var(--callout-text);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 24px 0;
+    font-style: italic;
+}
+
+.article-body blockquote p {
+    margin-bottom: 0;
+}
+
+/* Details / Accordion */
+.article-body details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    transition: border-color 0.2s;
+}
+
+.article-body details[open] {
+    border-color: var(--accent-orange);
+}
+
+.article-body summary {
+    font-weight: 700;
+    color: var(--text-main);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    transition: color 0.2s;
+}
+
+.article-body summary:hover {
+    color: var(--accent-orange);
+}
+
+.article-body details[open] summary {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Figures, Images & Captions */
+.article-body figure {
+    margin: 28px 0;
+    text-align: center;
+}
+
+.article-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 16px auto;
+}
+
+.article-body figcaption {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Media & Responsive Embeds (iframe / video) */
+.article-body iframe,
+.article-body video {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+/* Keyboard badge & Highlights */
+.article-body kbd {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-main);
+}
+
+.article-body mark {
+    background-color: rgba(255, 125, 26, 0.2);
+    color: var(--text-main);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* Callout Variants */
+.callout-info {
+    border-left-color: #3b82f6 !important;
+    background: rgba(59, 130, 246, 0.08) !important;
+    color: var(--text-main) !important;
+}
+
+.callout-success {
+    border-left-color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+    color: var(--text-main) !important;
+}
+
+.callout-warning {
+    border-left-color: #f59e0b !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    color: var(--text-main) !important;
+}
+

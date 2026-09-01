@@ -49,11 +49,28 @@ function getBodyHtml(html) {
   return bodyMatch ? bodyMatch[1] : html;
 }
 
-function cleanHtml(html) {
-  return html
+// Clean unwanted scripts/styles and normalize styles into design system tokens
+function normalizeAndCleanHtml(html) {
+  let cleaned = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
     .replace(/<!--[\s\S]*?-->/g, '');
+
+  // Strip hardcoded font families to inherit system font
+  cleaned = cleaned.replace(/font-family:\s*[^;"]+;?/gi, '');
+
+  // Replace hardcoded static text colors with CSS theme variables
+  cleaned = cleaned.replace(/color:\s*(#000000|#000|#111111|#111|#121212|#1a1a1a|#222222|#222|#333333|#333|black);?/gi, 'color: var(--text-main);');
+  cleaned = cleaned.replace(/color:\s*(#555555|#555|#666666|#666|#777777|#777|#888888|#888|#999999|#999|#a1a1aa|gray|grey);?/gi, 'color: var(--text-muted);');
+
+  // Replace hardcoded static backgrounds with CSS theme variables
+  cleaned = cleaned.replace(/background(-color)?:\s*(#ffffff|#fff|#fafafa|#f8f9fa|#000000|#000|#09090b|#121215|#18181b|white|black);?/gi, 'background-color: var(--bg-card);');
+  cleaned = cleaned.replace(/background(-color)?:\s*(#f1f3f5|#e2e8f0|#1a1a1e|#27272a);?/gi, 'background-color: var(--bg-alt);');
+
+  // Replace hardcoded borders with CSS theme variable
+  cleaned = cleaned.replace(/border(-color)?:\s*(1px\s+solid\s+)?(#e2e8f0|#27272a|#cccccc|#ccc|#dddddd|#ddd|#eeeeee|#eee);?/gi, 'border: 1px solid var(--border);');
+
+  return cleaned;
 }
 
 function estimateDuration(markdownText) {
@@ -76,19 +93,33 @@ async function main() {
   }
 
   console.log(`Membaca file: ${filePath}`);
-  const htmlContent = fs.readFileSync(filePath, 'utf8');
+  const rawHtmlContent = fs.readFileSync(filePath, 'utf8');
 
   // Extract initial meta
-  const rawTitle = extractTitle(htmlContent);
-  const rawDesc = extractDescription(htmlContent);
+  const rawTitle = extractTitle(rawHtmlContent);
+  const rawDesc = extractDescription(rawHtmlContent);
 
-  // Clean and convert content
-  const cleanedHtml = cleanHtml(getBodyHtml(htmlContent));
+  // Normalize HTML for Design System compatibility
+  const normalizedHtml = normalizeAndCleanHtml(getBodyHtml(rawHtmlContent));
+
+  // Configure Turndown to preserve rich design system elements (tables, details, cards, media, embeds)
   const turndownService = new TurndownService({
     headingStyle: 'atx',
     codeBlockStyle: 'fenced'
   });
-  const markdownBody = turndownService.turndown(cleanedHtml);
+
+  // Preserve rich HTML tags that are supported by our design system
+  turndownService.keep([
+    'table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
+    'details', 'summary',
+    'figure', 'figcaption',
+    'iframe', 'video', 'audio',
+    'kbd', 'mark',
+    'div', 'span',
+    'svg', 'path'
+  ]);
+
+  const markdownBody = turndownService.turndown(normalizedHtml);
   const estimatedDuration = estimateDuration(markdownBody);
 
   // Setup prompt interface

@@ -872,3 +872,69 @@ pre.code-block, pre[class*="language-"] {
     color: var(--text-main) !important;
 }
 
+/* Arabic Typography & Dua Cards */
+.arabic-text {
+    font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+    font-size: 1.7rem;
+    line-height: 2.3;
+    direction: rtl;
+    text-align: right;
+    color: var(--text-main);
+    margin: 14px 0;
+    word-spacing: 2px;
+    font-weight: 400;
+}
+
+.arabic-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 24px 0;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.arabic-card:hover {
+    border-color: var(--accent-orange);
+}
+
+.arabic-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.arabic-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+}
+
+.arabic-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.arabic-translation {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-style: normal;
+}
+

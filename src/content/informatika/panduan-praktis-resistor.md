@@ -32,15 +32,23 @@ Untuk menentukan nilai resistor yang dibutuhkan, kita menggunakan **Hukum Ohm**:
   <div style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">
     Rumus Dasar Hukum Ohm
   </div>
-  <div class="formula-math">R = V / I</div>
+  <div class="formula-math" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+    <span>R =</span>
+    <span style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; font-size: 0.9em;">
+      <span style="border-bottom: 2px solid var(--accent-orange); padding: 0 10px 4px 10px;">V</span>
+      <span style="padding-top: 4px;">I</span>
+    </span>
+  </div>
   <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0;">
-    Di mana <strong>R</strong> = Resistansi (Ohm / Ω), <strong>V</strong> = Tegangan (Volt), dan <strong>I</strong> = Arus (Ampere).
+    Di mana <strong>R</strong> = Resistansi (Ohm / &Omega;), <strong>V</strong> = Tegangan (Volt), dan <strong>I</strong> = Arus (Ampere).
   </p>
 </div>
 
 > **Contoh Kasus Nyata:**  
 > Jika kita memiliki sumber daya baterai **V = 9 Volt** dan ingin menyalakan LED dengan batas arus **I = 0,03 Ampere**:  
-> $$\text{R} = \frac{9\text{ V}}{0{,}03\text{ A}} = 300\text{ }\Omega$$  
+> <div style="font-family: 'Fira Code', monospace; font-size: 1.15rem; font-weight: 700; color: var(--accent-orange); margin: 8px 0;">
+>   R = 9V / 0,03A = 300 &Omega;
+> </div>
 > Maka kita membutuhkan resistor dengan resistansi minimal **300 Ohm** agar LED menyala terang dengan aman.
 
 ---
@@ -53,7 +61,16 @@ Mengapa sebuah benda bisa memiliki nilai hambatan yang berbeda-beda? Nilai resis
   <div style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">
     Rumus Hambatan Kawat & Material
   </div>
-  <div class="formula-math">R = \rho \times \left( \frac{L}{A} \right)</div>
+  <div class="formula-math" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <span>R = &rho; &times;</span>
+    <span style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; font-size: 0.9em;">
+      <span style="border-bottom: 2px solid var(--accent-orange); padding: 0 10px 4px 10px;">L</span>
+      <span style="padding-top: 4px;">A</span>
+    </span>
+  </div>
+  <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; margin-bottom: 0;">
+    <strong>R</strong>: Hambatan (&Omega;) &bull; <strong>&rho;</strong> (rho): Hambat jenis (&Omega;&middot;m) &bull; <strong>L</strong>: Panjang kawat (m) &bull; <strong>A</strong>: Luas penampang (m&sup2;)
+  </p>
 </div>
 
 Untuk memudahkan memahaminya, kita dapat menganalogikan aliran arus listrik seperti **arus kendaraan di jalan raya**:
@@ -382,6 +399,6 @@ Coba tebak nilai resistor berikut, lalu klik untuk mencocokkan jawaban Anda:
 ## 🎯 Kesimpulan Praktikum
 
 1. **Fungsi Utama**: Menghambat arus listrik agar komponen sensitif seperti LED dan IC tidak rusak terbakar.
-2. **Hukum Ohm**: Kuat arus berbanding lurus dengan tegangan dan berbanding terbalik dengan nilai hambatan ($I = V / R$).
+2. **Hukum Ohm**: Kuat arus berbanding lurus dengan tegangan dan berbanding terbalik dengan nilai hambatan (<em>I = V / R</em>).
 3. **Penyimpanan Nilai**: Gelang warna memudahkan identifikasi nilai tanpa perlu alat ukur canggih pada tahap perakitan awal.
 4. **Toleransi**: Nilai fisik resistor selalu memiliki deviasi wajar dari nilai nominal teoretisnya.

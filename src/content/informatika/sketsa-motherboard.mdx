@@ -1,0 +1,417 @@
+---
+title: "Panduan Praktikum: Sketsa & Pemetaan Anatomi Motherboard PC"
+description: "Modul praktikum Dasar-Dasar TJKT kelas XI: Memahami tata letak arsitektur motherboard komputer melalui analogi kota metropolis, sketsa grid 4 kuadran, dan analisis troubleshooting perangkat keras."
+pubDate: 2026-09-07
+category: "Hardware & Perakitan"
+tags: ["motherboard", "hardware", "tjkt", "praktikum", "troubleshooting", "pc"]
+duration: 8
+---
+
+{/* Header Modul Praktikum */}
+<div class="article-card" style="background: linear-gradient(135deg, rgba(30, 60, 114, 0.15) 0%, rgba(42, 82, 152, 0.15) 100%); border-left: 4px solid var(--accent-orange); margin-bottom: 28px;">
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+    <span class="card-tag tag-tkj">MODUL AJAR PRAKTIKUM</span>
+    <span class="card-tag tag-garden">FASE F &bull; KELAS XI</span>
+    <span class="card-tag tag-garden">4 JP (4 &times; 45 MENIT)</span>
+  </div>
+  <h2 style="margin: 0 0 10px 0; border-bottom: none; padding-bottom: 0;">Praktek Sketsa Anatomi Motherboard Komputer</h2>
+  <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+    Mata Pelajaran: <strong>Dasar-Dasar Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</strong> &bull; MAN 2 Cianjur
+  </p>
+</div>
+
+{/* Informasi Tabel Modul Ringkas */}
+<div class="table-responsive" style="margin: 20px 0 32px 0;">
+  <table>
+    <tbody>
+      <tr>
+        <td style="width: 25%; font-weight: 700; background: var(--bg-alt);">Fase / Kelas</td>
+        <td>Fase F / Kelas XI (Sebelas) &ndash; Konsentrasi Keahlian TJKT</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700; background: var(--bg-alt);">Alokasi Waktu</td>
+        <td>4 Jam Pelajaran (4 &times; 45 Menit / 1 Kali Pertemuan Tatap Muka)</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700; background: var(--bg-alt);">Penyusun</td>
+        <td>Tim Guru Produktif TJKT MAN 2 Cianjur</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700; background: var(--bg-alt);">Platform Pendukung</td>
+        <td>EduQuest Learning Management System &bull; Laboratorium Komputer Hardware</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## 🏙️ 1. Pendahuluan & Analogi Dunia Nyata
+
+### Mengapa Harus Menggambar Sketsa Motherboard?
+
+Bayangkan Anda adalah seorang insinyur tata kota yang dikirim ke sebuah kota metropolitan yang sangat padat seperti Jakarta atau Tokyo. Tugas Anda adalah memelihara dan memperbaiki sistem drainase serta jaringan kelistrikan kota tersebut.
+
+Apakah Anda akan langsung membongkar jalanan tanpa melihat peta terlebih dahulu? Tentu tidak. Anda memerlukan **peta taktis** untuk mengetahui letak balai kota, gardu induk listrik, dan jalur jalan tol utama yang menghubungkan seluruh distrik.
+
+**Motherboard (Papan Induk)** adalah miniatur dari kota metropolitan super-canggih tersebut:
+
+<div class="feature-grid-3">
+  <div class="feature-card">
+    <div class="feature-icon-badge">🏛️</div>
+    <h4 style="margin-bottom: 8px;">CPU (Processor)</h4>
+    <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">
+      <strong>Balai Kota:</strong> Pusat pengambilan seluruh keputusan komputasi dan instruksi pemrosesan utama.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon-badge">🅿️</div>
+    <h4 style="margin-bottom: 8px;">RAM (Memory)</h4>
+    <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">
+      <strong>Area Parkir Transit:</strong> Menampung antrean data sementara yang siap dijemput oleh prosesor secara kilat.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon-badge">👮</div>
+    <h4 style="margin-bottom: 8px;">Chipset (PCH)</h4>
+    <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">
+      <strong>Polisi Lalu Lintas:</strong> Mengatur laju arus data periferal agar tidak terjadi kemacetan (*bottleneck*).
+    </p>
+  </div>
+</div>
+
+<figure style="margin: 32px 0; text-align: center;">
+  <img 
+    src="https://lh3.googleusercontent.com/d/1MSpW7wffhKPobrnbfOXiV1g1woque5oL" 
+    alt="Bagan Blok Anatomi Motherboard dan Grid Sketsa" 
+    loading="lazy"
+    style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);" 
+  />
+  <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">
+    <strong>Gambar 1:</strong> Diagram Blok Anatomi Motherboard dan Teknik Pembagian Grid 4 Kuadran.
+  </figcaption>
+</figure>
+
+<div class="callout callout-info">
+  <p>
+    <strong>Tujuan Utama Praktek:</strong> Kegiatan sketsa ini bukan sekadar menggambar seni rupa, melainkan <strong>melakukan pemetaan taktis (<em>Tactical Mapping</em>)</strong>. Teknisi hardware yang andal mampu mengidentifikasi lokasi komponen secara refleks hanya dalam hitungan detik saat melakukan inspeksi kerusakan.
+  </p>
+</div>
+
+---
+
+## 🔬 2. Dasar Teori: Anatomi Mini-Metropolis
+
+Sebelum memegang pensil dan kertas gambar, pahami peran setiap distrik komponen vital berikut:
+
+### A. Jantung Pemrosesan & Regulasi Daya
+
+1. **Socket CPU (Central Processing Unit):**  
+   Dudukan utama prosesor. Perhatikan tuas pengunci (*retention arm*) dan deretan kontak pin emas (tipe **LGA** pada Intel modern atau **PGA/AM4** pada AMD).
+2. **VRM (Voltage Regulator Module):**  
+   Kumpulan komponen di sekitar soket CPU yang terdiri dari *Choke* (kotak magnetik abu-abu/hitam), *Mosfet*, dan kapasitor padat. Berfungsi sebagai gardu trafo penurun tegangan 12V dari PSU menjadi tegangan presisi ~1.2V untuk prosesor.
+
+### B. Jalur Logistik & Penyimpanan Cepat
+
+3. **Slot RAM (DIMM Slots):**  
+   Slot vertikal panjang dengan tuas pengunci di kedua ujungnya. Perhatikan letak celah pembatas (*notch key*) agar memori tidak terbalik saat dipasang.
+4. **Chipset (PCH - Platform Controller Hub):**  
+   Chip pengontrol jalur data ekspansi sekunder (SATA, USB, Audio, LAN), umumnya ditutupi lempengan pendingin heatsink aluminium.
+5. **Slot M.2 NVMe & Port SATA:**  
+   Gerbang media penyimpanan. Slot M.2 berbentuk pipih horizontal yang dipaut langsung ke PCB, sedangkan port SATA menyerupai soket siku berbentuk huruf "L".
+
+### C. Jalur Tol Ekspansi & Komunikasi Eksternal
+
+6. **Slot PCIe (PCI Express) x16:**  
+   Slot ekspansi terpanjang dengan bandwidth tertinggi untuk menancapkan kartu grafis (*Dedicated GPU / VGA Card*).
+7. **Slot PCIe x1:**  
+   Slot ekspansi pendek untuk kartu periferal tambahan seperti kartu WiFi internal atau sound card studio.
+8. **Back Panel I/O:**  
+   Gugusan port yang menonjol keluar di bagian belakang casing (USB Type-A/C, HDMI, DisplayPort, RJ-45 Gigabit LAN, dan jack audio 3.5mm).
+
+### D. Penyuplai Arus & Penyimpan Pengaturan
+
+9. **Konektor Power ATX 24-Pin:**  
+   Port kabel daya terbesar yang menyuplai arus listrik utama dari power supply ke seluruh sirkuit papan induk.
+10. **Konektor Power CPU 4/8-Pin:**  
+    Konektor daya di sudut kiri atas motherboard khusus untuk menyuplai arus intensif ke VRM prosesor.
+11. **Baterai CMOS (CR2032):**  
+    Baterai kancing 3V yang menjaga chip RTC (Real Time Clock) dan memori CMOS tetap menyala untuk menyimpan tanggal, waktu, serta pengaturan BIOS saat kabel stopkontak dicabut.
+
+---
+
+## 🧰 3. Peralatan Praktikum
+
+Siapkan seluruh perlengkapan berikut di atas meja kerja yang bersih dan bebas dari listrik statis:
+
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 8%; text-align: center;">No</th>
+        <th style="width: 25%;">Alat &amp; Bahan</th>
+        <th style="width: 32%;">Spesifikasi / Keterangan</th>
+        <th>Fungsi Praktikum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">1</td>
+        <td><strong>Unit Motherboard Fisik</strong></td>
+        <td>Form Factor ATX atau Micro-ATX (M-ATX)</td>
+        <td>Objek observasi langsung</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">2</td>
+        <td><strong>Kertas Gambar A4 / F4</strong></td>
+        <td>HVS tebal 80 gram atau Buku Gambar A4</td>
+        <td>Media pembuatan sketsa fisik</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">3</td>
+        <td><strong>Pensil Kayu (HB &amp; 2B)</strong></td>
+        <td>HB (sketsa grid tipis), 2B (garis tegas/arsir)</td>
+        <td>Membuat garis bantu &amp; rintisan bentuk</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">4</td>
+        <td><strong>Penggaris Mika 30 cm</strong></td>
+        <td>Penggaris transparan dengan skala mm presisi</td>
+        <td>Memastikan kelurusan &amp; proporsi garis</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">5</td>
+        <td><strong>Penghapus Lembut (Dust-Free)</strong></td>
+        <td>Penghapus putih non-abrasif</td>
+        <td>Membersihkan garis bantu pensil</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">6</td>
+        <td><strong>Pena Gambar (Drawing Pen)</strong></td>
+        <td>Ujung jarum ukuran 0.2 atau 0.5 warna hitam</td>
+        <td>Proses penegasan garis akhir (*inking*)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center; font-weight: 700;">7</td>
+        <td><strong>Pensil Warna / Highlighter</strong></td>
+        <td>Warna: Merah, Kuning, Biru, Hijau</td>
+        <td>Pewarnaan tematik pembeda distrik fungsi</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## 📝 4. Langkah Praktikum Bertahap
+
+Lakukan praktikum secara runtut sesuai tahapan manajemen waktu berikut:
+
+### Fase 1: Orientasi Posisi (15 Menit)
+1. Letakkan unit motherboard di atas meja beralas karet atau spons antistatis.
+2. Posisikan **Back Panel I/O berada tepat di sisi KIRI Anda** (orientasi standar industri).
+3. Amati form factor papan: persegi panjang penuh (*Standard ATX*) atau bujur sangkar (*Micro-ATX*).
+
+### Fase 2: Pembuatan Grid 4 Kuadran (20 Menit)
+1. Gambar kotak batas luar motherboard pada kertas menggunakan pensil **HB** dengan margin 2 cm dari tepi kertas.
+2. Tarik garis tengah vertikal dan horizontal secara tipis untuk membagi papan menjadi **4 Kuadran Acuan**:
+   - **Kuadran I (Kiri Atas):** Distrik Back Panel I/O & VRM Heatsink.
+   - **Kuadran II (Kanan Atas):** Distrik Socket CPU & Deretan Slot RAM DIMM.
+   - **Kuadran III (Kiri Bawah):** Distrik Slot Ekspansi PCIe & Baterai CMOS.
+   - **Kuadran IV (Kanan Bawah):** Distrik Chipset PCH, Port SATA, & Pin Header Front Panel.
+
+### Fase 3: Pemetaan Garis Komponen / Drafting (45 Menit)
+- **Langkah 1:** Gambar kotak **Socket CPU** di Kuadran II seluas kurang lebih 1/6 bidang papan.
+- **Langkah 2:** Gambar 2 atau 4 bilah vertikal **Slot RAM** di sisi kanan soket CPU.
+- **Langkah 3:** Gambar bilah horizontal panjang **Slot PCIe x16** di Kuadran III.
+- **Langkah 4:** Gambar soket persegi panjang **ATX 24-Pin** di tepi paling kanan kuadran II/IV.
+- **Langkah 5:** Gambar deretan blok **Back Panel I/O** di sepanjang tepi kiri kuadran I.
+- **Langkah 6:** Lengkapi dengan lingkaran koin **Baterai CMOS**, kotak **Chipset**, dan deretan port **SATA**.
+
+### Fase 4: Inking & Skema Pewarnaan Tematik (30 Menit)
+Tebalkan seluruh garis kontur komponen menggunakan **Drawing Pen hitam**. Hapus sisa goresan pensil secara hati-hati, lalu warnai setiap komponen sesuai **Skema Standar EduQuest TJKT**:
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 20px 0;">
+  <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+    <strong style="color: #ef4444; display: block;">Warna Merah</strong>
+    <span style="font-size: 0.85rem; color: var(--text-main);"><strong>Kelistrikan / Power:</strong> ATX 24-Pin, Power CPU 8-Pin, & Modul VRM.</span>
+  </div>
+
+  <div style="background: rgba(234, 179, 8, 0.1); border-left: 4px solid #eab308; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+    <strong style="color: #eab308; display: block;">Warna Kuning</strong>
+    <span style="font-size: 0.85rem; color: var(--text-main);"><strong>Komputasi & Memori:</strong> Socket CPU & Slot RAM DIMM.</span>
+  </div>
+
+  <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+    <strong style="color: #3b82f6; display: block;">Warna Biru</strong>
+    <span style="font-size: 0.85rem; color: var(--text-main);"><strong>Ekspansi & Komunikasi:</strong> Slot PCIe x16, PCIe x1, & Back I/O.</span>
+  </div>
+
+  <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+    <strong style="color: #10b981; display: block;">Warna Hijau</strong>
+    <span style="font-size: 0.85rem; color: var(--text-main);"><strong>Penyimpanan Data:</strong> Slot M.2 NVMe SSD & Port SATA.</span>
+  </div>
+</div>
+
+---
+
+## 📋 5. Lembar Kerja Praktikum (Quest Sheet)
+
+<div class="article-card" style="margin: 28px 0; border: 2px solid var(--border);">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <span class="card-tag tag-tkj" style="font-size: 0.75rem;">QUEST IDENTIFIKASI</span>
+    <h3 style="margin: 6px 0;">LEMBAR KERJA SISWA &bull; KODE: EQ-TJKT-MTHRBD-01</h3>
+  </div>
+
+  <div style="background: var(--bg-alt); padding: 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;">
+    <p style="margin: 4px 0;"><strong>Nama Siswa:</strong> __________________________________________________</p>
+    <p style="margin: 4px 0;"><strong>Kelas:</strong> XI TJKT ______</p>
+    <p style="margin: 4px 0;"><strong>Tanggal Uji:</strong> __________________________________________________</p>
+  </div>
+
+  <h4>Misi 1: Identifikasi Motherboard Riil</h4>
+  <ol style="margin-bottom: 24px;">
+    <li><strong>Merk / Brand Manufaktur:</strong> ___________________________________________</li>
+    <li><strong>Model / Nomor Seri Chipset:</strong> ___________________________________________</li>
+    <li><strong>Tipe Dudukan Socket CPU:</strong> ___________________________________________</li>
+    <li><strong>Generasi Slot Memori RAM:</strong> <em>(DDR3 / DDR4 / DDR5)</em> _____________________</li>
+  </ol>
+
+  <h4>Misi 2: Tabel Analisis Pin-Point Komponen</h4>
+  <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 12px;">
+    Cantumkan nomor indeks penunjuk (1 s.d. 10) pada lembar gambar sketsa Anda, lalu lengkapi analisis dampaknya:
+  </p>
+
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%; text-align: center;">No</th>
+          <th style="width: 27%;">Nama Komponen</th>
+          <th style="width: 35%;">Fungsi Utama</th>
+          <th style="width: 30%;">Gejala Jika Rusak / Malfungsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align: center;">1</td><td>Socket CPU</td><td>Menghubungkan prosesor dengan motherboard</td><td>PC mati total / tidak ada respon power</td></tr>
+        <tr><td style="text-align: center;">2</td><td>Slot RAM DIMM</td><td>Menyalurkan data bus ke memori utama</td><td>Bunyi bip panjang berulang, no display</td></tr>
+        <tr><td style="text-align: center;">3</td><td>VRM (Choke & Mosfet)</td><td>Menstabilkan daya tegangan inti CPU</td><td>PC restart mendadak saat komputasi berat</td></tr>
+        <tr><td style="text-align: center;">4</td><td>Slot PCIe x16</td><td>Jalur komunikasi kartu grafis diskrit</td><td>Layar monitor blank / artefak grafis</td></tr>
+        <tr><td style="text-align: center;">5</td><td>Port SATA</td><td>Konektor transfer data HDD/SSD 2.5"</td><td>Penyimpanan tidak terdeteksi di BIOS</td></tr>
+        <tr><td style="text-align: center;">6</td><td>Slot M.2 NVMe</td><td>Jalur bus PCIe penyimpanan berkecepatan tinggi</td><td>OS Windows gagal booting (No boot device)</td></tr>
+        <tr><td style="text-align: center;">7</td><td>Baterai CMOS (CR2032)</td><td>Suplai daya chip jam RTC dan setting BIOS</td><td>Jam/tanggal Windows selalu ter-reset ke masa lalu</td></tr>
+        <tr><td style="text-align: center;">8</td><td>Chipset PCH</td><td>Pusat kendali komunikasi I/O selatan</td><td>Seluruh port USB dan audio tidak terdeteksi</td></tr>
+        <tr><td style="text-align: center;">9</td><td>Port ATX 24-Pin</td><td>Pintu masuk utama arus 12V, 5V, 3.3V</td><td>Motherboard tidak menerima arus dari PSU</td></tr>
+        <tr><td style="text-align: center;">10</td><td>Back Panel I/O</td><td>Antarmuka colokan periferal eksternal</td><td>Perangkat keyboard, mouse, LAN gagal terhubung</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+---
+
+## ⚖️ 6. Rubrik Penilaian Praktikum
+
+Tolak ukur evaluasi portofolio gambar teknik siswa dinilai berdasarkan matriks berikut:
+
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 22%;">Kriteria Penilaian</th>
+        <th style="width: 10%; text-align: center;">Bobot</th>
+        <th>Sangat Baik (85 &ndash; 100)</th>
+        <th>Cukup Baik (70 &ndash; 84)</th>
+        <th>Kurang (&lt; 70)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Presisi &amp; Skala Proporsi</strong></td>
+        <td style="text-align: center; font-weight: 800; color: var(--accent-orange);">30%</td>
+        <td>Penempatan komponen sangat akurat sesuai 4 kuadran; perbandingan ukuran komponen sangat proporsional.</td>
+        <td>Posisi sebagian besar komponen benar, namun rasio ukuran beberapa komponen kurang seimbang.</td>
+        <td>Penempatan komponen acak dan tidak mengindahkan batas kuadran fisik asli.</td>
+      </tr>
+      <tr>
+        <td><strong>Kelengkapan Komponen</strong></td>
+        <td style="text-align: center; font-weight: 800; color: var(--accent-orange);">30%</td>
+        <td>Menggambar dan memberi label minimal 10 komponen vital dengan benar dan jelas.</td>
+        <td>Menggambar dan melabeli antara 6 hingga 9 komponen vital.</td>
+        <td>Komponen yang digambar kurang dari 6 atau banyak label yang salah.</td>
+      </tr>
+      <tr>
+        <td><strong>Kerapian &amp; Pewarnaan</strong></td>
+        <td style="text-align: center; font-weight: 800; color: var(--accent-orange);">20%</td>
+        <td>Garis tegas memakai drawing pen (*inking*), bebas coretan sisa pensil, pewarnaan tematik rapi.</td>
+        <td>Gambar cukup rapi, namun pewarnaan kurang merata atau masih ada sisa garis pensil.</td>
+        <td>Sketsa kotor, tidak ditebalkan dengan drawing pen, dan tidak diwarnai.</td>
+      </tr>
+      <tr>
+        <td><strong>Analisis Fungsi Komponen</strong></td>
+        <td style="text-align: center; font-weight: 800; color: var(--accent-orange);">20%</td>
+        <td>Tabel misi diisi lengkap dengan analisis teknis yang logis dan mendalam.</td>
+        <td>Tabel diisi lengkap tetapi penjelasan fungsi masih terlalu teoretis/singkat.</td>
+        <td>Tabel analisis tidak diisi atau sebagian besar penjelasan fungsi keliru.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## 🕵️ 7. Tantangan Kasus: "The Hardware Detective"
+
+Uji kemampuan diagnosa teknisi Anda dengan memecahkan studi kasus laboratorium berikut:
+
+<div class="callout callout-warning">
+  <strong style="font-size: 1.05rem;">Skenario Kerusakan Pelanggan:</strong>
+  <p style="margin-top: 8px;">
+    <em>"Seorang guru membawa PC desktop laboratorium ke meja servis TJKT. Saat tombol power ditekan, <strong>lampu indikator dan kipas pendingin menyala berputar kencang, namun layar monitor sama sekali tidak menampilkan gambar (No Display) disertai bunyi 'BIP' panjang berulang kali</strong>. Selain itu, setiap kali kabel stopkontak dicabut setelah digunakan, waktu dan penanggalan sistem operasi selalu kembali ke <strong>1 Januari 2010</strong>."</em>
+  </p>
+</div>
+
+Klik dropdown di bawah untuk melihat rincian bedah investigasinya:
+
+<div style="display: flex; flex-direction: column; gap: 14px; margin: 24px 0;">
+  <details>
+    <summary>Analisis Kasus 1: Layar Blank / No Display &amp; Bunyi Bip Panjang</summary>
+    <div style="padding-top: 14px;">
+      <p style="margin-bottom: 8px;">
+        <strong>Komponen Terdampak:</strong> Modul RAM (DIMM) atau Slot RAM di <strong>Kuadran II</strong>.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
+        <strong>Penyebab Utama:</strong> Pada kode BIOS standar (seperti Award/AMI BIOS), satu bunyi bip panjang yang berulang tanpa henti menandakan kegagalan inisialisasi pada memori utama (RAM).
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">
+        <strong>Solusi Lapangan:</strong> Lepas keping RAM dari motherboard, bersihkan pin tembaga menggunakan penghapus pensil lembut untuk mengangkat lapisan oksidasi kotoran, lalu pasang kembali ke slot kedua secara presisi hingga tuas berbunyi *klik*.
+      </p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Analisis Kasus 2: Jam &amp; Tanggal Windows Selalu Ter-reset</summary>
+    <div style="padding-top: 14px;">
+      <p style="margin-bottom: 8px;">
+        <strong>Komponen Terdampak:</strong> Baterai CMOS di <strong>Kuadran III</strong>.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
+        <strong>Penyebab Utama:</strong> Tegangan baterai kancing lithium <strong>CR2032 (3 Volt)</strong> telah drop di bawah 2.4 Volt atau habis total. Akibatnya, saat PC kehilangan suplai listrik dinding, chip RTC (Real Time Clock) kehilangan daya cadangan sehingga konfigurasi waktu kembali ke default pabrik BIOS.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">
+        <strong>Solusi Lapangan:</strong> Tekan klip pengunci baterai CMOS ke arah luar, keluarkan baterai lama, dan gantikan dengan baterai kancing CR2032 baru yang memiliki tegangan 3V prima.
+      </p>
+    </div>
+  </details>
+</div>
+
+---
+
+## 🎯 Kesimpulan & Refleksi
+
+Keahlian membuat sketsa dan mengenali topologi fisik motherboard adalah fondasi tak tergantikan bagi calon teknisi jaringan dan komputer:
+1. **Pemahaman Tata Letak:** Mempercepat proses perakitan kabel (*cable management*) tanpa kebingungan mencari letak konektor daya atau front panel header.
+2. **Keamanan Sirkuit:** Menghindarkan kesalahan fatal seperti salah menancapkan konektor daya atau memaksakan orientasi modul RAM.
+3. **Efisiensi Diagnostik:** Mengisolasi akar permasalahan hardware secara cepat berdasarkan distrik kuadran yang bermasalah.

@@ -938,3 +938,168 @@ pre.code-block, pre[class*="language-"] {
     font-style: normal;
 }
 
+/* ==========================================================================
+   Resistor & Electronics Visual Components
+   ========================================================================== */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 24px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.table-responsive table {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.resistor-table th {
+    background-color: var(--bg-alt);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.resistor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.resistor-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Specific Resistor Colors */
+.resistor-hitam   { background: #18181b; color: #ffffff; }
+.resistor-cokelat { background: #6d4c41; color: #ffffff; }
+.resistor-merah   { background: #dc2626; color: #ffffff; }
+.resistor-oranye  { background: #ea580c; color: #ffffff; }
+.resistor-kuning  { background: #eab308; color: #18181b; }
+.resistor-hijau   { background: #16a34a; color: #ffffff; }
+.resistor-biru    { background: #2563eb; color: #ffffff; }
+.resistor-ungu    { background: #7c3aed; color: #ffffff; }
+.resistor-abu     { background: #64748b; color: #ffffff; }
+.resistor-putih   { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+.resistor-emas    { background: linear-gradient(135deg, #d97706, #fbbf24, #b45309); color: #18181b; font-weight: 800; }
+.resistor-perak   { background: linear-gradient(135deg, #64748b, #cbd5e1, #475569); color: #0f172a; font-weight: 800; }
+
+/* Visual Formula Box */
+.formula-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.formula-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-orange), #3b82f6);
+}
+
+.formula-math {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-orange);
+    margin: 12px 0;
+    letter-spacing: 0.05em;
+}
+
+/* Interactive Resistor Band Preview */
+.resistor-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.resistor-body {
+    width: 220px;
+    height: 64px;
+    background: #d4a373;
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid #a67c52;
+    box-shadow: inset 0 8px 12px rgba(255,255,255,0.4), inset 0 -8px 12px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.resistor-lead-left, .resistor-lead-right {
+    width: 40px;
+    height: 6px;
+    background: linear-gradient(180deg, #e2e8f0, #94a3b8, #64748b);
+    border-radius: 3px;
+}
+
+.resistor-band-stripe {
+    width: 12px;
+    height: 100%;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Feature Grid Cards */
+.feature-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-orange);
+}
+
+.feature-icon-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--accent-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
